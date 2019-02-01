@@ -18,41 +18,28 @@
                           body-classes="px-lg-5 py-lg-5"
                           class="border-0">
                         <template>
-                            <div class="text-muted text-center mb-3">
-                                <small>Sign in with</small>
+                            <div class="text-center text-muted mb-3">
+                                <small>Sign in</small>
                             </div>
-                            <div class="btn-wrapper text-center">
-                                <base-button type="neutral">
-                                    <img slot="icon" src="img/icons/common/github.svg">
-                                    Github
-                                </base-button>
-
-                                <base-button type="neutral">
-                                    <img slot="icon" src="img/icons/common/google.svg">
-                                    Google
-                                </base-button>
-                            </div>
-                        </template>
-                        <template>
-                            <div class="text-center text-muted mb-4">
-                                <small>Or sign in with credentials</small>
-                            </div>
-                            <form role="form">
+                            <form id="loginForm" role="form">
                                 <base-input alternative
+                                            required
                                             class="mb-3"
                                             placeholder="Email"
-                                            addon-left-icon="ni ni-email-83">
+                                            addon-left-icon="ni ni-email-83"
+                                            ref="userEmail">
                                 </base-input>
                                 <base-input alternative
                                             type="password"
                                             placeholder="Password"
-                                            addon-left-icon="ni ni-lock-circle-open">
+                                            addon-left-icon="ni ni-lock-circle-open"
+                                            ref="userPassword">
                                 </base-input>
                                 <base-checkbox>
                                     Remember me
                                 </base-checkbox>
                                 <div class="text-center">
-                                    <base-button type="primary" class="my-4">Sign In</base-button>
+                                    <base-button type="primary" class="my-4" v-on:click="submitLogin()">Sign In</base-button>
                                 </div>
                             </form>
                         </template>
@@ -75,7 +62,15 @@
     </section>
 </template>
 <script>
-export default {};
+
+export default {
+    methods:{
+        submitLogin: function(){
+            console.log(this.$refs)
+            this.axios.p
+        }
+    }
+};
 </script>
 <style>
 </style>
