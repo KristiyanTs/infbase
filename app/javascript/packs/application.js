@@ -12,8 +12,11 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(Argon);
 Vue.use(VueAxios, axios);
+Vue.use(require('vue-cookies'));
 
 document.addEventListener('DOMContentLoaded', () => {
+  axios.defaults.headers.common['Accept'] = 'application/json';
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
   new Vue({
     router,
     render: h => h(App)
