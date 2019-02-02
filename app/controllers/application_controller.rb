@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   #protect_from_forgery with: :null_session
   protect_from_forgery with: :exception, unless: -> { request.format.json? }
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def render_resource(resource)
     if resource.errors.empty?

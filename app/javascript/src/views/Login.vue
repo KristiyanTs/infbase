@@ -35,11 +35,12 @@
                                             addon-left-icon="ni ni-lock-circle-open"
                                             ref="userPassword">
                                 </base-input>
-                                <base-checkbox>
+                                <base-checkbox ref="rememberUser">
                                     Remember me
                                 </base-checkbox>
                                 <div class="text-center">
-                                    <base-button type="primary" class="my-4" v-on:click="submitLogin()">Sign In</base-button>
+                                    <base-button type="primary" class="my-4" v-on:click="submitLogin()">Sign In
+                                    </base-button>
                                 </div>
                             </form>
                         </template>
@@ -63,14 +64,26 @@
 </template>
 <script>
 
-export default {
-    methods:{
-        submitLogin: function(){
-            console.log(this.$refs)
-            this.axios.p
+    export default {
+        methods: {
+            submitLogin: function () {
+                console.log(this);
+                let v_instance = this;
+                this.axios.post('/users/sign_in', {
+                    user: {
+                        email: 'me@me.com',//this.$refs.userEmail.value
+                        password: 'verysecretword',
+                        remember_me: this.$refs.rememberUser.model ? 1: 0,
+                    }
+                }).then(function (response) {
+                    console.log(response);
+                    window.$cookies.set('jwt',response.headers.authorization);
+                    v_instance.axios.defaults.headers.common['Authorization'] = response.headers.authorization;
+                });
+
+            }
         }
-    }
-};
+    };
 </script>
 <style>
 </style>
