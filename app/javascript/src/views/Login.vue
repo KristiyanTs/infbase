@@ -71,14 +71,13 @@
                 let v_instance = this;
                 this.axios.post('/users/sign_in', {
                     user: {
-                        email: 'me@me.com',//this.$refs.userEmail.value
-                        password: 'verysecretword',
+                        email: this.$refs.userEmail.value,
+                        password: this.$refs.userPassword.value,
                         remember_me: this.$refs.rememberUser.model ? 1: 0,
                     }
                 }).then(function (response) {
                     console.log(response);
-                    window.$cookies.set('jwt',response.headers.authorization);
-                    v_instance.axios.defaults.headers.common['Authorization'] = response.headers.authorization;
+                    v_instance.$store.dispatch('signedIn', [response.headers.authorization, response.data.id])
                 });
 
             }

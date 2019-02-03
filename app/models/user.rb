@@ -21,4 +21,6 @@ class User < ApplicationRecord
          jwt_revocation_strategy: JWTBlacklist
   has_many :questions
   has_many :answers
+  has_many :course_members
+  has_many :courses, :through => :course_members
 end
