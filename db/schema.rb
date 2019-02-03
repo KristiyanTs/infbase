@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 2019_02_01_221345) do
   create_table "answers", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
+    t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "question_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_02_01_221345) do
 
   create_table "jwt_blacklist", force: :cascade do |t|
     t.string "jti", null: false
+    t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
@@ -52,20 +53,20 @@ ActiveRecord::Schema.define(version: 2019_02_01_221345) do
     t.boolean "anonymous"
     t.bigint "user_id"
     t.bigint "course_id"
-    t.bigint "session_id"
+    t.bigint "teaching_session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_questions_on_course_id"
-    t.index ["session_id"], name: "index_questions_on_session_id"
+    t.index ["teaching_session_id"], name: "index_questions_on_teaching_session_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
+  create_table "teaching_sessions", force: :cascade do |t|
     t.time "start_time"
+    t.bigint "tutor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tutor_id"
-    t.index ["tutor_id"], name: "index_sessions_on_tutor_id"
+    t.index ["tutor_id"], name: "index_teaching_sessions_on_tutor_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -85,7 +86,7 @@ ActiveRecord::Schema.define(version: 2019_02_01_221345) do
   add_foreign_key "course_members", "courses"
   add_foreign_key "course_members", "users"
   add_foreign_key "questions", "courses"
-  add_foreign_key "questions", "sessions"
+  add_foreign_key "questions", "teaching_sessions"
   add_foreign_key "questions", "users"
-  add_foreign_key "sessions", "users", column: "tutor_id"
+  add_foreign_key "teaching_sessions", "users", column: "tutor_id"
 end

@@ -18,6 +18,12 @@ export default new Vuex.Store({
         self.commit('signedIn',[token,userRole])
       });
     },
+    signedOut(state){
+      let self = this;
+      this.$axios.delete('/users/sign_out').then(function(response){
+        self.commit('signedOut');
+      })
+    }
   },
   mutations: {
     signedIn(state, [token, userRole]){
@@ -25,5 +31,11 @@ export default new Vuex.Store({
       state.signedIn = true;
       state.userRole = userRole
     },
+    signedOut(state){
+      window.$cookies.remove('jwt');
+      window.$cookies.remove('userId');
+      state.signedIn = false;
+      state.userRole = '';
+    }
   }
 });
