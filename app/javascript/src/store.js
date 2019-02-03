@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from "vue/dist/vue.esm";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
@@ -34,6 +34,7 @@ export default new Vuex.Store({
     signedOut(state){
       window.$cookies.remove('jwt');
       window.$cookies.remove('userId');
+      this.$axios.defaults.headers.common['Authorization'] = null;
       state.signedIn = false;
       state.userRole = '';
     }
