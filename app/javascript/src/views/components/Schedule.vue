@@ -6,7 +6,7 @@
 				<th v-for="day in days" :key="day">
 					<span class="btn btn-sm"
 					      :class="{'btn-primary': day.join() == get_today().join()}">
-				      {{formatted_date(day)}}
+			      {{formatted_date(day)}}
 			    </span>
 			  </th>
 				<th @click="next_period()"><font-awesome-icon icon="caret-right" size="2x" /></th>
@@ -51,18 +51,7 @@
 						"date": [2019, 2, 4],
 						"time": "10:00",
 						"tutor": {"name": "Ivan", "experience": "4 years", "courses": ["Inf2B", "Inf2D"]}
-					},
-					{
-						"date": [2019, 2, 5],
-						"time": "11:10",
-						"tutor": {"name": "Petar", "experience": "2 years", "courses": ["CogSci", "DA", "Inf2B"]}
-					},
-					{
-						date: [2019, 2, 6],
-						"time": "14:10",
-						"tutor": {"name": "Petar", "experience": "2 years", "courses": ["CogSci", "DA", "Inf2B"]}
 					}
-
 				]
 			}
 		},
@@ -94,7 +83,6 @@
 							 { weekday: 'short', month: 'short', day: 'numeric' });
 			},
 			row_exists(start) {
-				//check if there is a session which start the same hour and is in the current date range
 				let days = this.days;
 				let sessions = this.sessions;
 
@@ -114,7 +102,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style scoped>
 	.schedule tr th {
 		border-top: 0px;
 	}
