@@ -23,4 +23,6 @@ class User < ApplicationRecord
   has_many :answers
   has_many :course_members
   has_many :courses, :through => :course_members
+  has_many :interests
+  has_many :expertises
 end
