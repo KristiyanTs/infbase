@@ -17,28 +17,10 @@
               <div class="col px-0">
                   <div class="row">
                       <div class="col-lg-6">
-                          <h1 class="display-3  text-white">A beautiful Design System
-                              <span>completed with examples</span>
+                          <h1 class="display-3  text-white">InfBase
+                              <span>A drop-in helpdesk for pre-honours Informatics students to get additional tutoring and support with their courses.</span>
                           </h1>
-                          <p class="lead  text-white">The design system comes with four pre-built pages to help
-                              you get started faster. You can change the text and images and you're good to
-                              go.</p>
-                          <div class="btn-wrapper">
-                              <base-button tag="a"
-                                           href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html"
-                                           class="mb-3 mb-sm-0"
-                                           type="info"
-                                           icon="fa fa-code">
-                                  Components
-                              </base-button>
-                              <base-button tag="a"
-                                           href="https://www.creative-tim.com/product/argon-design-system"
-                                           class="mb-3 mb-sm-0"
-                                           type="white"
-                                           icon="ni ni-cloud-download-95">
-                                  Download HTML
-                              </base-button>
-                          </div>
+                          <p class="lead  text-white">In addition to supporting drop-in assistance, InfBase can be used as a place to work together with other students, with support from an InfBase tutor.</p>
                       </div>
                   </div>
               </div>
@@ -57,8 +39,7 @@
                                   </icon>
                                   <h6 class="text-primary text-uppercase">Schedule</h6> 
                                 </div>
-                                <p class="description mt-3">Argon is a great free UI package based on Bootstrap 4
-                                    that includes the most important components and features.</p>
+                                <p class="description mt-3">Just drop in into one of the sessions, you don’t have to sign up in advance but committing regularly can help you pacing your course work.</p>
                                 <base-button tag="a" href="#" type="primary" class="mt-4">
                                     Learn more
                                 </base-button>
@@ -71,8 +52,7 @@
                                   </icon>
                                   <h6 class="text-success text-uppercase">FAQ</h6> 
                                 </div>
-                                <p class="description mt-3">Argon is a great free UI package based on Bootstrap
-                                    4 that includes the most important components and features.</p>
+                                <p class="description mt-3">To help InfBase tutors answering your questions, please let them know in advance by posting a question.</p><br>
                                 <base-button tag="a" href="#" type="success" class="mt-4">
                                     Learn more
                                 </base-button>
@@ -85,8 +65,7 @@
                                   </icon>
                                   <h6 class="text-warning text-uppercase">Tutors</h6>
                                 </div>
-                                <p class="description mt-3">Argon is a great free UI package based on Bootstrap
-                                    4 that includes the most important components and features.</p>
+                                <p class="description mt-3">InfBase tutors are selected on the basis of expertise and coverage, offering support and advice on core pre-honours courses in Informatics.</p>
                                 <base-button tag="a" href="#" type="warning" class="mt-4">
                                     Learn more
                                 </base-button>
@@ -99,6 +78,12 @@
     </section>
     <section class="section section-lg">
       <div class="container">
+          <div class="row justify-content-center text-center mb-lg">
+            <div class="col-lg-8">
+              <h2 class="display-3">Schedule</h2>
+              <p class="lead text-muted">InfBase is in room 7.03 of Appleton tower</p>
+            </div>
+          </div>
         <schedule></schedule>
       </div>
     </section>
