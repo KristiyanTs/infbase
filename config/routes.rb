@@ -21,12 +21,9 @@ Rails.application.routes.draw do
                  passwords: 'users/passwords'
                }
 
-    scope '/users/:id' do
-      get '/courses', action: :courses, controller: 'users/related'
-    end
-
-    scope '/users/:id' do
-      get '/courses', action: :courses, controller: 'users/related'
+    scope '/users' do
+      get ':id/courses', action: :courses, controller: 'users/related'
+      get '/all', action: :users, controller: 'users/related'
     end
   end
 end

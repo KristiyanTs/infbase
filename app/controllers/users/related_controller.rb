@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class Users::RelatedController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: %i[courses]
   respond_to :json
+
+  def users
+    render json: User.all
+  end
 
   def courses
     @course_memberships = @user.course_members
@@ -13,7 +17,6 @@ class Users::RelatedController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end

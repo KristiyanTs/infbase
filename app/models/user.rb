@@ -23,7 +23,7 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: JWTBlacklist
 
-  enum role: %i[user tutor admin].freeze
+  enum role: %i[student tutor admin].freeze
 
   has_many :questions
   has_many :answers
