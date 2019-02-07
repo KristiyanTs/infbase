@@ -34,6 +34,6 @@ class User < ApplicationRecord
   has_many :reports
 
   def attributes
-    { id: id, email: email, role: role }
+    { id: id, email: email, role: role, first_name: first_name, last_name: last_name }
   end
 end
