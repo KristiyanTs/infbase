@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :update, :delete]
 
   def render_resource(resource)
     if resource.errors.empty?

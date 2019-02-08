@@ -6,12 +6,18 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    if current_user
+      @questions = Question.where(course: current_user.courses)
+    else
+      @questions = Question.all
+    end
+    render json: @questions.as_json
   end
 
   # GET /questions/1
   # GET /questions/1.json
-  def show; end
+  def show;
+  end
 
   # POST /questions
   # POST /questions.json
