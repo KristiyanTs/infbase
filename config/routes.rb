@@ -25,5 +25,9 @@ Rails.application.routes.draw do
       get ':id/courses', action: :courses, controller: 'users/related'
       get '/all', action: :users, controller: 'users/related'
     end
+
+    scope "/admin" do
+      resources :users, controller: 'users/users'
+    end
   end
 end
