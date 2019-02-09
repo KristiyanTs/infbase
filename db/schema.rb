@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_105149) do
+ActiveRecord::Schema.define(version: 2019_02_09_111837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,13 +50,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_105149) do
     t.index ["tutor_id"], name: "index_expertises_on_tutor_id"
   end
 
-  create_table "hours", force: :cascade do |t|
-    t.time "start"
-    t.time "end"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "interests", force: :cascade do |t|
     t.bigint "teaching_session_id"
     t.bigint "user_id"
@@ -70,6 +63,15 @@ ActiveRecord::Schema.define(version: 2019_02_11_105149) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
+  end
+
+  create_table "question_tags", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_tags_on_question_id"
+    t.index ["topic_id"], name: "index_question_tags_on_topic_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -109,12 +111,10 @@ ActiveRecord::Schema.define(version: 2019_02_11_105149) do
   end
 
   create_table "teaching_sessions", force: :cascade do |t|
+    t.time "start_time"
     t.bigint "tutor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "hour_id"
-    t.date "start_date"
-    t.index ["hour_id"], name: "index_teaching_sessions_on_hour_id"
     t.index ["tutor_id"], name: "index_teaching_sessions_on_tutor_id"
   end
 
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 2019_02_11_105149) do
   add_foreign_key "expertises", "users", column: "tutor_id"
   add_foreign_key "interests", "teaching_sessions"
   add_foreign_key "interests", "users"
+  add_foreign_key "question_tags", "questions"
+  add_foreign_key "question_tags", "topics"
   add_foreign_key "questions", "courses"
   add_foreign_key "questions", "teaching_sessions"
   add_foreign_key "questions", "users"
@@ -157,7 +159,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_105149) do
   add_foreign_key "tags", "questions"
   add_foreign_key "tags", "reports"
   add_foreign_key "tags", "topics"
-  add_foreign_key "teaching_sessions", "hours"
   add_foreign_key "teaching_sessions", "users", column: "tutor_id"
   add_foreign_key "topics", "courses"
 end
