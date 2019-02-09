@@ -23,4 +23,10 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_tags
   has_many :topics, through: :question_tags
+  has_many :question_votes
+
+  def vote_count
+    self.question_votes.count
+  end
+
 end

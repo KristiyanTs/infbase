@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_111837) do
+ActiveRecord::Schema.define(version: 2019_02_09_205610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 2019_02_09_111837) do
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_question_tags_on_question_id"
     t.index ["topic_id"], name: "index_question_tags_on_topic_id"
+  end
+
+  create_table "question_votes", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_votes_on_question_id"
+    t.index ["user_id"], name: "index_question_votes_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -151,6 +160,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_111837) do
   add_foreign_key "interests", "users"
   add_foreign_key "question_tags", "questions"
   add_foreign_key "question_tags", "topics"
+  add_foreign_key "question_votes", "questions"
+  add_foreign_key "question_votes", "users"
   add_foreign_key "questions", "courses"
   add_foreign_key "questions", "teaching_sessions"
   add_foreign_key "questions", "users"
