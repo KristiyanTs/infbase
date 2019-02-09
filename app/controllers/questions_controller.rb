@@ -11,7 +11,9 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.all
     end
-    render json: @questions.as_json
+    render json: @questions.as_json(include: {
+        topics: {only: [:id, :name]}
+    })
   end
 
   # GET /questions/1
