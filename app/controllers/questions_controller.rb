@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
     end
     render json: @questions.as_json(include: {
         topics: {only: [:id, :name]}
-    })
+    }, methods: :vote_count)
   end
 
   # GET /questions/1
