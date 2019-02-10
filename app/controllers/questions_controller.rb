@@ -19,6 +19,12 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show;
+    render json: @question.as_json(include: {
+        topics: {only: [:id, :name]},
+        answers: {only: [:body, :created_at],
+                  include: :user
+                 }
+    }, methods: :vote_count)
   end
 
   # POST /questions
