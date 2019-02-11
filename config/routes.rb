@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :teaching_sessions
     resources :course_members
     resources :courses
+    resources :topics
 
     devise_for :users,
                path: '',
