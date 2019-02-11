@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
-class Users::UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
   respond_to :json
+
+  def index
+    if params['roles']
+      render json: User.where(role: params['roles'])
+    else
+      render json: User.all
+    end
+  end
 
   def update
   	@user = User.find(params[:id])

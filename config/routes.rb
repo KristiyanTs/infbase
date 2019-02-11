@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :answers
     resources :questions
-    resources :teaching_sessions
+    resources :teaching_sessions, only: [:index, :show]
     resources :course_members
     resources :courses
+    resources :hours, only: [:index]
 
     devise_for :users,
                path: '',
@@ -21,13 +22,14 @@ Rails.application.routes.draw do
                  passwords: 'users/passwords'
                }
 
-    scope '/users' do
-      get ':id/courses', action: :courses, controller: 'users/related'
-      get '/all', action: :users, controller: 'users/related'
+    namespace 'users' do
+      get ':id/courses', controller: 'related', action: :courses
     end
 
-    scope "/admin" do
-      resources :users, controller: 'users/users'
+    namespace 'admin' do
+      resources :users, only: [:index, :update]
+      resources :hours, only: [:index, :create, :update, :destroy]
+      resources :teaching_sessions, only: [:create, :update, :destroy]
     end
   end
 end
