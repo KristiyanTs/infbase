@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2019_02_13_095756) do
     t.index ["tutor_id"], name: "index_expertises_on_tutor_id"
   end
 
+  create_table "hours", force: :cascade do |t|
+    t.time "start"
+    t.time "end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "interests", force: :cascade do |t|
     t.bigint "teaching_session_id"
     t.bigint "user_id"
@@ -125,6 +132,9 @@ ActiveRecord::Schema.define(version: 2019_02_13_095756) do
     t.bigint "tutor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "hour_id"
+    t.date "start_date"
+    t.index ["hour_id"], name: "index_teaching_sessions_on_hour_id"
     t.index ["tutor_id"], name: "index_teaching_sessions_on_tutor_id"
   end
 
@@ -169,5 +179,6 @@ ActiveRecord::Schema.define(version: 2019_02_13_095756) do
   add_foreign_key "tags", "questions"
   add_foreign_key "tags", "reports"
   add_foreign_key "tags", "topics"
+  add_foreign_key "teaching_sessions", "hours"
   add_foreign_key "teaching_sessions", "users", column: "tutor_id"
 end
