@@ -26,7 +26,7 @@ class Question < ApplicationRecord
   has_many :question_votes
 
   def vote_count
-    self.question_votes.count
+    QuestionVote.where(question: self).sum(:value)
   end
 
 end
