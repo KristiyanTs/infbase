@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
       else
         @question.question_votes.create(user: current_user, value: 1)
       end
-      render :show, status: :created, location: @question
+      render json: @question, status: :created
     else
       render json: @question.errors, status: :unprocessable_entity
     end
