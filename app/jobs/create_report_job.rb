@@ -5,9 +5,10 @@ class CreateReportJob
 
   def perform(sessions)
     sessions = [sessions]
-    sessions.map{ |ses| Report.create(teaching_session_id: ses.id,
-                                      tutor_id: ses.tutor_id,
-                                      completed: false)}
-
+    sessions.map do |ses|
+      Report.create(teaching_session_id: ses.id,
+                    tutor_id: ses.tutor_id,
+                    completed: false)
+    end
   end
 end

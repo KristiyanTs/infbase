@@ -18,9 +18,9 @@ Rails.application.routes.draw do
                  registration: 'signup'
                },
                controllers: {
-                   sessions: 'users/sessions',
-                   registrations: 'users/registrations',
-                   passwords: 'users/passwords'
+                 sessions: 'users/sessions',
+                 registrations: 'users/registrations',
+                 passwords: 'users/passwords'
                }
 
     namespace 'users' do
