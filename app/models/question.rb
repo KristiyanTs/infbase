@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: questions
@@ -13,7 +12,9 @@
 #  teaching_session_id :bigint(8)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  views               :integer          default(0)
 #
+
 require 'elasticsearch/model'
 
 class Question < ApplicationRecord

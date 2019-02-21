@@ -21,7 +21,10 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    render json: @question.as_json(include: {
+    Question.increment_counter(:views, @question.id)
+    exposed_attributes = [:title, :body, :created_at, :course_id]
+    render json: @question.as_json(only:exposed_attributes,
+                                   include: {
                                      topics: { only: %i[id name] },
                                      answers: { only: %i[body created_at],
                                                 include: :user }
