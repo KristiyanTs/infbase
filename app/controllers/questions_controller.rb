@@ -6,16 +6,16 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.joins(:question_votes).group('questions.id').order('sum(question_votes.value) desc')
-    @questions = if current_user
-                   @questions.where(course: current_user.courses)
-                 else
-                   @questions.all
-                 end
-
+    @questions = Question.where(nil)
+    @questions = @questions.user(current_user.id) if params[:asked_by_me]
+    @questions = @questions.course(params[:course]) if params[:course].present?
+    @questions = @questions.tagged_with(params[:tag]) if params[:tag].present?
+    @questions = @questions.joins(:question_votes).group('questions.id').select('SUM(question_votes.value) AS vote_count', :title, :id)
+    @questions = @questions.order('vote_count desc')
+    #render json: @questions.as_json
     render json: @questions.as_json(include: {
                                       topics: { only: %i[id name] }
-                                    }, methods: :vote_count)
+                                    })
   end
 
   # GET /questions/1
