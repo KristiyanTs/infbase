@@ -10,8 +10,18 @@ class QuestionsController < ApplicationController
     @questions = @questions.user(current_user.id) if params[:asked_by_me]
     @questions = @questions.course(params[:course]) if params[:course].present?
     @questions = @questions.tagged_with(params[:tag]) if params[:tag].present?
-    @questions = @questions.joins(:question_votes).group('questions.id').select('SUM(question_votes.value) AS vote_count', :title, :id)
-    @questions = @questions.order('vote_count desc')
+    @questions = @questions.joins(:question_votes).group('questions.id').select('SUM(question_votes.value) AS vote_count', :title, :id, :views)
+    case params[:order_by]
+    when "vote_count"
+      @questions = @questions.order('vote_count desc')
+    when "posted"
+      @questions = @questions.order('questions.created_at desc')
+    when "view_count"
+      @questions = @questions.order('questions.views desc')
+    else
+      @questions = @questions.order('vote_count desc')
+    end
+
     #render json: @questions.as_json
     render json: @questions.as_json(include: {
                                       topics: { only: %i[id name] }
