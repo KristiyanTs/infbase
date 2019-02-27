@@ -7,7 +7,11 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.where(nil)
+    @questions = @questions.left_joins(:answers).where(answers: {question_id: nil}) if params[:unanswered]
+    @questions = @questions.joins(:answers) if params[:answered]
     @questions = @questions.user(current_user.id) if params[:asked_by_me]
+    @questions = @questions.where(course: current_user.courses) if params[:user_courses]
+    @questions = @questions.where(teaching_session: current_user.teaching_sessions.where('start_date >= ?', Date.today)) if params[:upcoming_session]
     @questions = @questions.course(params[:course]) if params[:course].present?
     @questions = @questions.tagged_with(params[:tag]) if params[:tag].present?
     @questions = @questions.joins(:question_votes).group('questions.id').select('SUM(question_votes.value) AS vote_count', :title, :id, :views)
