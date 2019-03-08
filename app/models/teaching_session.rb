@@ -68,7 +68,7 @@ class TeachingSession < ApplicationRecord
   def self.destroy_with_type(session:, type:, until_date:)
     case type
     when 'today'
-      session.destroy
+      session.destroy unless session.report.completed
     when 'weekly'
       period_start = session.start_date.to_date
       period_end = until_date.to_date
