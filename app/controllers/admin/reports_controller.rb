@@ -20,9 +20,9 @@ class Admin::ReportsController < ApplicationController
     if @report.update(report_params)
       @report.update(completed: true)
       ReportTopic.where(report_id: @report.id).destroy_all
-      params['report']['topics'].each do |topic_name|
-        topic = Topic.find_or_create_by(name: topic_name)
-        report_topic = ReportTopic.find_or_create_by(report_id: @report.id, topic_id: topic.id)
+      params['report']['topics'].each do |topic|
+        _topic = Topic.find_or_create_by(id: topic["id"])
+        ReportTopic.find_or_create_by(report_id: @report.id, topic_id: _topic.id)
       end
       render json: @report.merge_data, status: :ok
     else
@@ -31,7 +31,9 @@ class Admin::ReportsController < ApplicationController
   end
 
   def export_csv
-    render json: Report.to_csv(Time.new - 20.day, Time.new)
+    start_date = params[:start_date].to_date - 1.day
+    end_date = params[:end_date].to_date.end_of_day
+    render json: Report.to_csv(start_date, end_date)
   end
 
   private
