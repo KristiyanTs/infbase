@@ -22,6 +22,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
+         :cosign_authenticatable,
          :jwt_authenticatable,
          jwt_revocation_strategy: JWTBlacklist
 
@@ -39,7 +40,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   def attributes
-    { id: id, email: email, role: role, first_name: first_name, last_name: last_name, biography: biography }
+    {id: id, email: email, role: role, first_name: first_name, last_name: last_name, biography: biography}
   end
 
   def attach_info

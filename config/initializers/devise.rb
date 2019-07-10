@@ -300,4 +300,34 @@ Devise.setup do |config|
   end
 
   config.navigational_formats = []
+
+  config.cosign_base_url = "https://www.ease.ed.ac.uk"
+
+  # you can override these if you need to, but cosign_base_url is usually enough
+  config.cosign_login_url = "https://www.ease.ed.ac.uk"
+  config.cosign_logout_url = "https://www.ease.ed.ac.uk/logout.cgi"
+  # config.cosign_validate_url = "https://cas.myorganization.com/serviceValidate"
+
+  # The CoSign specification allows for the passing of a follow URL to be displayed when
+  # a user logs out on the CoSign server. RubyCoSign-Server also supports redirecting to a
+  # URL via the destination param. Set either of these urls and specify either nil,
+  # 'destination' or 'follow' as the logout_url_param. If the urls are blank but
+  # logout_url_param is set, a default will be detected for the service.
+  # config.cosign_destination_url = 'https://cas.myorganization.com'
+  # config.cosign_follow_url = 'https://cas.myorganization.com'
+  # config.cosign_logout_url_param = nil
+
+  # By default, devise_cosign_authenticatable will create users.  If you would rather
+  # require user records to already exist locally before they can authenticate via
+  # CoSign, uncomment the following line.
+  # config.cosign_create_user = false
+
+  # If you want to use the Devise Timeoutable module with single sign out,
+  # uncommenting this will redirect timeouts to the logout url, so that the CoSign can
+  # take care of signing out the other serviced applocations. Note that each
+  # application manages timeouts independently, so one application timing out will
+  # kill the session on all applications serviced by the CoSign.
+  # config.warden do |manager|
+  #   manager.failure_app = DeviseCosignAuthenticatable::SingleSignOut::WardenFailureApp
+  # end
 end

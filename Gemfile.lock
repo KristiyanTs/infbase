@@ -9,6 +9,12 @@ GIT
       hashie
     elasticsearch-rails (6.0.0)
 
+PATH
+  remote: /home/kyle/RubymineProjects/devise_cosign_authenticatable
+  specs:
+    devise_cosign_authenticatable (10.0.0)
+      devise (>= 2.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,8 +41,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_storage_base64 (0.1.3)
-      rails (~> 5.2.0, <= 5.2.2)
     activejob (5.2.2)
       activesupport (= 5.2.2)
       globalid (>= 0.3.6)
@@ -252,13 +256,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_storage_base64
   annotate
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
   devise-jwt
+  devise_cosign_authenticatable!
   elasticsearch-model!
   elasticsearch-rails!
   factory_bot_rails (~> 4.8)
@@ -279,7 +283,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.6.1p33
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
